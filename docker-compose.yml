@@ -17,9 +17,6 @@ services:
       - php
 
   php:
-    dns:
-      - 8.8.8.8
-      - 9.9.9.9
     build:
       context: .
       dockerfile: Dockerfile-php
@@ -38,10 +35,11 @@ services:
 
   db:
     image: mysql
+    command: "--innodb_use_native_aio=0"
     environment:
       MYSQL_ROOT_PASSWORD: example
     volumes:
-      - ../db/mysql:/var/lib/mysql
+      - C:\Users\Elumini\Documents\docker\php-7\db:/var/lib/mysql
     deploy:
       resources:
         limits:
@@ -52,29 +50,3 @@ services:
           memory: 40M
     ports:
       - "3306:3306"
-
-  #PostgreSQL:
-    #restart: always
-    #image: sameersbn/postgresql:9.6-2
-    #ports:
-      #- "5432:5432"
-    #environment:
-      #- DEBUG=false
-
-      #- DB_USER=drupal
-      #- DB_PASS=drupal
-      #- DB_TEMPLATE=
-      #- DB_EXTENSION=
-      #- PGDATA = C:\Users\Daiane\Documents\docker\drupal\postgre
-      #- POSTGRES_PASSWORD=root
-
-      #- REPLICATION_MODE=
-      #- REPLICATION_USER=
-      #- REPLICATION_PASS=
-      #- REPLICATION_SSLMODE=
-    #volumes:
-      #- ../postgre:/var/lib/postgresql
-
-
-    
-    
