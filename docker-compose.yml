@@ -1,9 +1,9 @@
-version: "3"
+version: "3.0"
 services:
   web:
     image: nginx
     volumes:
-      - ../code:/var/www/html
+      - ../www:/var/www/html
       - ./nginx.conf:/etc/nginx/conf.d/default.conf
       - ./log/nginx:/var/log/nginx
     ports:
@@ -21,7 +21,7 @@ services:
       context: .
       dockerfile: Dockerfile-php
     volumes:
-      - ../code:/var/www/html
+      - ../www:/var/www/html
     deploy:
       resources:
         limits:
@@ -39,7 +39,7 @@ services:
     environment:
       MYSQL_ROOT_PASSWORD: example
     volumes:
-      - C:\Users\Elumini\Documents\docker\php-7\db:/var/lib/mysql
+      - ../db:/var/lib/mysql
     deploy:
       resources:
         limits:
