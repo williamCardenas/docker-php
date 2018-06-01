@@ -34,12 +34,11 @@ services:
       - db
 
   db:
-    image: mysql
-    command: "--innodb_use_native_aio=0"
+    image: mariadb
     environment:
       MYSQL_ROOT_PASSWORD: example
     volumes:
-      - ../db:/var/lib/mysql
+      - ./db:/var/lib/mysql
     deploy:
       resources:
         limits:
